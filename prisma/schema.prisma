@@ -1,0 +1,86 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String @id @default(cuid()) @map("_id")
+  email    String @unique
+  password String
+}
+
+model Banner {
+  id       String @id @default(cuid()) @map("_id")
+  imageUrl String
+  imageKey String @unique
+}
+model About {
+  id       String @id @default(cuid()) @map("_id")
+  imageUrl String
+  imageKey String @unique
+}
+
+model CV {
+  id       String @id @default(cuid()) @map("_id")
+  pdfUrl String
+  pdfKey String @unique
+}
+
+model TD {
+  id           String @id @default(cuid()) @map("_id")
+  title        String @unique
+  Desc         String?
+  Website      String?
+  Tech         String?
+  contribution String?
+  username     String?
+  password     String?
+  type         Type   @default(WEB)
+}
+
+model Published {
+  id             String @id @default(cuid()) @map("_id")
+  image          String?
+  heading        String @unique
+  year           Int?
+  journal        String?
+  authors        String?
+  weblinks       String?
+  myContribution String?
+  type           ptype  @default(RESEARCH)
+}
+
+model Blog {
+  id       String @id @default(cuid()) @map("_id")
+  title    String?
+  author   String?
+  desc     String?
+  trending Int  @unique
+  image    String?
+  type     String
+}
+
+
+
+model Works {
+  id    String @id @default(cuid()) @map("_id")
+  start Int
+  end   String
+  title String
+  place String?
+  desc  String?
+}
+
+enum ptype {
+  GOVT
+  RESEARCH
+}
+
+enum Type {
+  WEB
+  STATISTICAL
+}
